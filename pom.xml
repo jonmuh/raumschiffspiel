@@ -5,27 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Basic Project Information -->
-    <groupId>com.prostep.spaceshipsgame</groupId>
-    <artifactId>SpaceshipsGame</artifactId>
+    <groupId>com.raumschiffspiel</groupId>
+    <artifactId>RaumschiffSpiel</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Spaceships Game</name>
-    <description>A simple spaceships shooter game developed for my class in school.</description>
-    <url>https://github.com/jonmuh/spaceships-game</url>
-
-    <!-- Licensing Information -->
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+    <name>Raumschiffspiel</name>
+    <description>Ein einfaches Spiel in der konsole.</description>
+    <url>https://github.com/jonmuh/raumschiffspiel</url>
 
     <!-- Issue Management -->
     <issueManagement>
         <system>GitHub Issues</system>
-        <url>https://github.com/jonmuh/spaceships-game/issues</url>
+        <url>https://github.com/jonmuh/raumschiffspiel/issues</url>
     </issueManagement>
 
     <!-- Properties Values -->
