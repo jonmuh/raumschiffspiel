@@ -1,6 +1,7 @@
 # spaceships-game
 
-This project is a sample game project that is part of my class in school.\
-It is a simple terminal based application developed in Java that contains a single galaxy, and some spaceships, planets, capitains, and so on...\
-\
-In the future a GUI might be added to display the game outside of the terminal.
+Das Raumschiffspiel aus der Lernsituation 5 aus dem Lernfeld 5
+Autor: Muhamed Jonuzovic
+
+Das Spiel wird für jetzt nur eine Konsolenanwendung bleiben wie von der Lernsituation verlangt.
+Wird am Ende die nötige Zeit übrig wird das Spiel auch ein Graphisches Interface bekommen.
