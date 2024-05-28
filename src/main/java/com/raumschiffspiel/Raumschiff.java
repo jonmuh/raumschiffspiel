@@ -5,9 +5,11 @@ public class Raumschiff {
     private String name;
     private int posY;
     private int posX;
+    private Kapitaen kapitaen;
 
-    public Raumschiff(String name, int posX, int posY) {
+    public Raumschiff(String name, Kapitaen kapitaen, int posX, int posY) {
         this.name = name;
+        this.kapitaen = kapitaen;
         this.posX = posX;
         this.posY = posY;
     }
@@ -36,13 +38,21 @@ public class Raumschiff {
         this.posX = posX;
     }
 
+    public Kapitaen getKapitaen() {
+        return kapitaen;
+    }
+
+    public void setKapitaen(Kapitaen kapitaen) {
+        this.kapitaen = kapitaen;
+    }
+
     public void fliegen(char richtung) {
         switch (richtung) {
             case 'a':
                 this.posX -= 1;
                 break;
             case 'd':
-                this.posY += 1;
+                this.posX += 1;
                 break;
             case 'w':
                 this.posY += 1;
