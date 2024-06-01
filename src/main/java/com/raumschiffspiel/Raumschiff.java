@@ -1,5 +1,7 @@
 package com.raumschiffspiel;
 
+import java.util.Scanner;
+
 public class Raumschiff {
 
     private String name;
