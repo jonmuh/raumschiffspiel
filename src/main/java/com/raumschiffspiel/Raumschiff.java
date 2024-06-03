@@ -12,6 +12,8 @@ public class Raumschiff {
     private double energieVersorgung;
     private int manoevrierFaehigkeit;
     private int waffenstaerke;
+    private int laserWaffenstaerke;
+    private int raketenWaffenstaerke;
 
     public Raumschiff(String name, Kapitaen kapitaen, int posX, int posY) {
         this.name = name;
@@ -20,7 +22,7 @@ public class Raumschiff {
         this.posY = posY;
     }
 
-    public Raumschiff(String name, int posY, int posX, Kapitaen kapitaen, Ladung ladung, int integritaetsgrad, int energieschild, double energieVersorgung, int manoevrierFaehigkeit, int waffenstaerke) {
+    public Raumschiff(String name, int posY, int posX, Kapitaen kapitaen, Ladung ladung, int integritaetsgrad, int energieschild, double energieVersorgung, int manoevrierFaehigkeit, int waffenstaerke, int laserWaffenstaerke, int raketenWaffenstaerke) {
         this.name = name;
         this.posY = posY;
         this.posX = posX;
@@ -31,6 +33,8 @@ public class Raumschiff {
         this.energieVersorgung = energieVersorgung;
         this.manoevrierFaehigkeit = manoevrierFaehigkeit;
         this.waffenstaerke = waffenstaerke;
+        this.laserWaffenstaerke = laserWaffenstaerke;
+        this.raketenWaffenstaerke = raketenWaffenstaerke;
     }
 
     public Raumschiff(RaumschiffBuilder raumschiffBuilder) {
@@ -44,6 +48,8 @@ public class Raumschiff {
         this.energieVersorgung = raumschiffBuilder.energieVersorgung;
         this.manoevrierFaehigkeit = raumschiffBuilder.manoevrierFaehigkeit;
         this.waffenstaerke = raumschiffBuilder.waffenstaerke;
+        this.laserWaffenstaerke = raumschiffBuilder.laserWaffenstaerke;
+        this.raketenWaffenstaerke = raumschiffBuilder.raketenWaffenstaerke;
     }
 
     public String getName() {
@@ -229,6 +235,37 @@ public class Raumschiff {
         }
     }
 
+    public void zerstoeren() {
+        if (this.integritaetsgrad <= 0) {
+            System.out.println(this.name + " wurde bereits zerstört!");
+            return;
+        }
+
+        this.integritaetsgrad = 0;
+        System.out.println(this.name + " wurde zerstört!");
+        //  hier weitere Logik, um das Raumschiff aus dem Spiel zu entfernen
+    }
+
+    public void laserAngriff(Raumschiff gegnerischesRaumschiff) {
+        int schaden = this.laserWaffenstaerke;
+
+        gegnerischesRaumschiff.integritaetsgrad -= schaden;
+
+        if (gegnerischesRaumschiff.integritaetsgrad <= 0) {
+            gegnerischesRaumschiff.zerstoeren();
+        }
+    }
+
+    public void raketenAngriff(Raumschiff gegnerischesRaumschiff) {
+        int schaden = this.raketenWaffenstaerke;
+
+        gegnerischesRaumschiff.integritaetsgrad -= schaden;
+
+        if (gegnerischesRaumschiff.integritaetsgrad <= 0) {
+            gegnerischesRaumschiff.zerstoeren();
+        }
+    }
+
 
     public static class RaumschiffBuilder {
 
@@ -242,6 +279,8 @@ public class Raumschiff {
         private double energieVersorgung;
         private int manoevrierFaehigkeit;
         private int waffenstaerke;
+        private int laserWaffenstaerke;
+        private int raketenWaffenstaerke;
 
         public RaumschiffBuilder name(String name) {
             this.name = name;
@@ -290,6 +329,16 @@ public class Raumschiff {
 
         public RaumschiffBuilder waffenstaerke(int waffenstaerke) {
             this.waffenstaerke = waffenstaerke;
+            return this;
+        }
+
+        public RaumschiffBuilder laserWaffenstaerke(int laserWaffenstaerke) {
+            this.laserWaffenstaerke = laserWaffenstaerke;
+            return this;
+        }
+
+        public RaumschiffBuilder raketenWaffenStaerke(int raketenWaffenstaerke) {
+            this.raketenWaffenstaerke = raketenWaffenstaerke;
             return this;
         }
 
