@@ -1,7 +1,5 @@
 package com.raumschiffspiel;
 
-import java.util.Scanner;
-
 public class Raumschiff {
 
     private String name;
@@ -184,6 +182,40 @@ public class Raumschiff {
         }
         return responseBuilder.toString();
     }
+
+    public void angreifen(Raumschiff gegnerischesRaumschiff) {
+        // Berechne den Schaden basierend auf verschiedenen Faktoren
+        int schaden = this.waffenstaerke - gegnerischesRaumschiff.energieschild;
+
+        // Überprüfe, ob der Schaden größer als null ist und füge Schaden zu
+        if (schaden > 0) {
+            gegnerischesRaumschiff.integritaetsgrad -= schaden;
+            // Prüfe, ob das gegnerische Raumschiff zerstört wurde
+            if (gegnerischesRaumschiff.integritaetsgrad <= 0) {
+                System.out.println(gegnerischesRaumschiff.getName() + " wurde zerstört!");
+            }
+        } else {
+            System.out.println("Der Angriff hat keinen Schaden verursacht!");
+        }
+    }
+
+    public void verteidigen(int schaden) {
+        // Berechne den tatsächlichen Schaden basierend auf Manövrierfähigkeit und Zufall
+        int verteidigungsbonus = (int) (Math.random() * this.manoevrierFaehigkeit) + 1;
+        schaden -= verteidigungsbonus;
+
+        // Überprüfe, ob das Schiff Schaden nimmt und verringere den Integritätsgrad
+        if (schaden > 0) {
+            this.integritaetsgrad -= schaden;
+            // Prüfe, ob das eigene Raumschiff zerstört wurde
+            if (this.integritaetsgrad <= 0) {
+                System.out.println(this.name + " wurde zerstört!");
+            }
+        } else {
+            System.out.println("Der Angriff wurde abgewehrt!");
+        }
+    }
+
 
     public static class RaumschiffBuilder {
 
