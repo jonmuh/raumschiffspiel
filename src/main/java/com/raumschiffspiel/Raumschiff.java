@@ -250,8 +250,8 @@ public class Raumschiff {
                 "name='" + name + '\'' +
                 ", posY=" + posY +
                 ", posX=" + posX +
-                ", kapitaen=" + kapitaen.toString() +
-                ", ladung=" + ladung.toString() +
+                ", kapitaen=" + kapitaen.getName() +
+                ", ladung=" + ladung.getName() +
                 ", integritaetsgrad=" + integritaetsgrad +
                 ", energieschild=" + energieschild +
                 ", energieVersorgung=" + energieVersorgung +

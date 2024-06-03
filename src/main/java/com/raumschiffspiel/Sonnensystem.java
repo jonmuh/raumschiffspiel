@@ -9,6 +9,12 @@ public class Sonnensystem {
     private static Kapitaen alexiaNova = new Kapitaen("Alexia Nova", 8, 6);
     private static Kapitaen admiralZenithNightfall = new Kapitaen("Admiral Zenith Nightfall", 10, 10);
 
+    // Ladungen
+    private static Ladung kisteBier = new Ladung("Kiste Bier", 20);
+    private static Ladung steine = new Ladung("Steine", 50);
+    private static Ladung bretter = new Ladung("Bretter", 100);
+    private static Ladung schwert = new Ladung("Schwert", 10);
+
     // Raumschiffe
     private static Raumschiff eosNova = new Raumschiff
             .RaumschiffBuilder()
@@ -23,6 +29,7 @@ public class Sonnensystem {
             .energieVersorgung(7.5)
             .raketenWaffenStaerke(65)
             .laserWaffenstaerke(86)
+            .ladung(kisteBier)
             .build();
     private static Raumschiff auroraQuest = new Raumschiff("AuroraQuest", admiralZenithNightfall,0,0);
 
@@ -31,11 +38,6 @@ public class Sonnensystem {
     private static Planet solara = new Planet("Solara", true, 80,90);
     private static Planet ktaris = new Planet("Ktaris", true, 30, 90);
 
-    // Ladungen
-    private static Ladung kisteBier = new Ladung("Kiste Bier", 20);
-    private static Ladung steine = new Ladung("Steine", 50);
-    private static Ladung bretter = new Ladung("Bretter", 100);
-    private static Ladung schwert = new Ladung("Schwert", 10);
 
     // Asteroidenfelder
     private static Asteroidfeld asteroidfeld1 = new Asteroidfeld(5, 10, 15);
@@ -135,6 +137,7 @@ public class Sonnensystem {
                     }
                 }
             });
+
         }
     }
 

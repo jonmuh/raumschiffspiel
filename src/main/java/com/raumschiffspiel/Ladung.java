@@ -1,5 +1,7 @@
 package com.raumschiffspiel;
 
+import java.util.Objects;
+
 public class Ladung {
 
     private String name;
@@ -16,7 +18,7 @@ public class Ladung {
     }
 
     public String getName() {
-        return name;
+        return Objects.requireNonNullElse(name, "Leerladung");
     }
 
     public void setName(String name) {
@@ -24,7 +26,7 @@ public class Ladung {
     }
 
     public int getEinhaiten() {
-        return einhaiten;
+        return Objects.requireNonNullElse(einhaiten, 0);
     }
 
     public void setEinhaiten(int einhaiten) {

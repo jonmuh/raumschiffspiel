@@ -1,5 +1,7 @@
 package com.raumschiffspiel;
 
+import java.util.Objects;
+
 public class Planet {
 
     private String name;
@@ -16,7 +18,7 @@ public class Planet {
     }
 
     public String getName() {
-        return name;
+        return Objects.requireNonNull(name, "Namenloser Planet");
     }
 
     public boolean getAtmosphaere() {
@@ -54,7 +56,7 @@ public class Planet {
                 ", atmosphaere=" + atmosphaere +
                 ", posX=" + posX +
                 ", posY=" + posY +
-                ", ladung=" + ladung.toString() +
+                ", ladung=" + ladung.getName() +
                 '}';
     }
 }
