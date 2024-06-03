@@ -20,6 +20,19 @@ public class Raumschiff {
         this.posY = posY;
     }
 
+    public Raumschiff(String name, int posY, int posX, Kapitaen kapitaen, Ladung ladung, int integritaetsgrad, int energieschild, double energieVersorgung, int manoevrierFaehigkeit, int waffenstaerke) {
+        this.name = name;
+        this.posY = posY;
+        this.posX = posX;
+        this.kapitaen = kapitaen;
+        this.ladung = ladung;
+        this.integritaetsgrad = integritaetsgrad;
+        this.energieschild = energieschild;
+        this.energieVersorgung = energieVersorgung;
+        this.manoevrierFaehigkeit = manoevrierFaehigkeit;
+        this.waffenstaerke = waffenstaerke;
+    }
+
     public Raumschiff(RaumschiffBuilder raumschiffBuilder) {
         this.name = raumschiffBuilder.name;
         this.posX = raumschiffBuilder.posX;
@@ -200,8 +213,8 @@ public class Raumschiff {
     }
 
     public void verteidigen(int schaden) {
-        // Berechne den tatsächlichen Schaden basierend auf Manövrierfähigkeit und Zufall
-        int verteidigungsbonus = (int) (Math.random() * this.manoevrierFaehigkeit) + 1;
+        // Berechne den tatsächlichen Schaden basierend auf Manövrierfähigkeit und Erfahrung des Captain
+        int verteidigungsbonus = this.kapitaen.getErfahrung() + this.manoevrierFaehigkeit;
         schaden -= verteidigungsbonus;
 
         // Überprüfe, ob das Schiff Schaden nimmt und verringere den Integritätsgrad
