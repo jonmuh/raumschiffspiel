@@ -30,4 +30,12 @@ public class Ladung {
     public void setEinhaiten(int einhaiten) {
         this.einhaiten = einhaiten;
     }
+
+    @Override
+    public String toString() {
+        return "Ladung{" +
+                "name='" + name + '\'' +
+                ", einhaiten=" + einhaiten +
+                '}';
+    }
 }

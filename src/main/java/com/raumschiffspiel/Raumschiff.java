@@ -179,29 +179,6 @@ public class Raumschiff {
         return areOnSameField;
     }
 
-    public String pruefeObNebenEinemRaumschiff (Raumschiff raumschiff) {
-        StringBuilder responseBuilder = new StringBuilder();
-        if (this.pruefeKoordniaten(raumschiff)) {
-            responseBuilder.append("Hier ist das Raumschiff ").append(raumschiff.getName());
-            return responseBuilder.toString();
-        } else {
-            return null;
-        }
-    }
-
-    public String pruefeObAufEinemPlanet (Planet planet) {
-        StringBuilder responseBuilder = new StringBuilder();
-        if (this.pruefeKoordniaten(planet)) {
-            responseBuilder.append("Hier ist der Planet ").append(planet.getName()).append("\n");
-            if (planet.getAtmosphaere()) {
-                responseBuilder.append(planet.getName()).append(" hat eine Atmosphaere.");
-            } else {
-                responseBuilder.append(planet.getName()).append(" hat keine Atmosphaere.");
-            }
-        }
-        return responseBuilder.toString();
-    }
-
     public void angreifen(Raumschiff gegnerischesRaumschiff) {
         // Berechne den Schaden basierend auf verschiedenen Faktoren
         int schaden = this.waffenstaerke - gegnerischesRaumschiff.energieschild;
@@ -212,6 +189,7 @@ public class Raumschiff {
             // Prüfe, ob das gegnerische Raumschiff zerstört wurde
             if (gegnerischesRaumschiff.integritaetsgrad <= 0) {
                 System.out.println(gegnerischesRaumschiff.getName() + " wurde zerstört!");
+                gegnerischesRaumschiff.zerstoeren();
             }
         } else {
             System.out.println("Der Angriff hat keinen Schaden verursacht!");
@@ -266,6 +244,23 @@ public class Raumschiff {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Raumschiff{" +
+                "name='" + name + '\'' +
+                ", posY=" + posY +
+                ", posX=" + posX +
+                ", kapitaen=" + kapitaen.toString() +
+                ", ladung=" + ladung.toString() +
+                ", integritaetsgrad=" + integritaetsgrad +
+                ", energieschild=" + energieschild +
+                ", energieVersorgung=" + energieVersorgung +
+                ", manoevrierFaehigkeit=" + manoevrierFaehigkeit +
+                ", waffenstaerke=" + waffenstaerke +
+                ", laserWaffenstaerke=" + laserWaffenstaerke +
+                ", raketenWaffenstaerke=" + raketenWaffenstaerke +
+                '}';
+    }
 
     public static class RaumschiffBuilder {
 

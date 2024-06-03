@@ -46,4 +46,13 @@ public class Kapitaen {
             return "Diplomatische Verhandlungen waren nicht erfolgreich!";
         }
     }
+
+    @Override
+    public String toString() {
+        return "Kapitaen{" +
+                "name='" + name + '\'' +
+                ", charisma=" + charisma +
+                ", erfahrung=" + erfahrung +
+                '}';
+    }
 }
