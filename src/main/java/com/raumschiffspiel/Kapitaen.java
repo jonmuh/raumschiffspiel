@@ -38,12 +38,12 @@ public class Kapitaen {
     public String diplomatischeVerhandlung(Kapitaen kapitaen) {
         if (this.erfahrung >= kapitaen.getErfahrung()) {
             if (this.charisma >= kapitaen.getCharisma()) {
-                return "Dimplomatische Erfahrunge waren erfolgreich!";
+                return "Diplomatische Verhandlungen waren erfolgreich!";
             } else {
-                return "Dimplomatische Erfahrunge waren nicht erfolgreich!";
+                return "Diplomatische Verhandlungen waren nicht erfolgreich!";
             }
         } else {
-            return "Dimplomatische Erfahrunge waren nicht erfolgreich!";
+            return "Diplomatische Verhandlungen waren nicht erfolgreich!";
         }
     }
 }
