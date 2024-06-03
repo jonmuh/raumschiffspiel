@@ -9,7 +9,14 @@ public class Sonnensystem {
     private static Kapitaen admiralZenithNightfall = new Kapitaen("Admiral Zenith Nightfall", 10, 10);
 
     // Raumschiffe
-    private static Raumschiff eosNova = new Raumschiff("EosNova", alexiaNova,0,0);
+//    private static Raumschiff eosNova = new Raumschiff("EosNova", alexiaNova,0,0);
+    private static Raumschiff eosNova = new Raumschiff
+            .RaumschiffBuilder()
+            .name("EosNova")
+            .kapitaen(alexiaNova)
+            .posX(0)
+            .posY(0)
+            .build();
     private static Raumschiff auroraQuest = new Raumschiff("AuroraQuest", admiralZenithNightfall,0,0);
 
     //Planeten
