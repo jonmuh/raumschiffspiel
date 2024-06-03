@@ -6,7 +6,7 @@ public class Ladung {
     private int einhaiten;
 
     public Ladung(){
-        this.name = "Leerladung ";
+        this.name = "Leerladung";
         this.einhaiten = 0;
     }
 
