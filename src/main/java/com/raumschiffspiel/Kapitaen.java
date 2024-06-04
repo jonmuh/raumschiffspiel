@@ -4,11 +4,13 @@ public class Kapitaen {
     private String name;
     private int charisma;
     private int erfahrung;
+    private double geld;
 
-    public Kapitaen(String name, int charisma, int erfahrung) {
+    public Kapitaen(String name, int charisma, int erfahrung, double geld) {
         this.name = name;
         this.charisma = charisma;
         this.erfahrung = erfahrung;
+        this.geld = geld;
     }
 
     public String getName() {
@@ -47,12 +49,19 @@ public class Kapitaen {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Kapitaen{" +
-                "name='" + name + '\'' +
-                ", charisma=" + charisma +
-                ", erfahrung=" + erfahrung +
-                '}';
+    public double getGeld() {
+        return geld;
+    }
+
+    public void setGeld(double geld) {
+        this.geld = geld;
+    }
+
+    public void addGeld(double betrag) {
+        this.geld += betrag;
+    }
+
+    public void subtractGeld(double betrag) {
+        this.geld -= betrag;
     }
 }

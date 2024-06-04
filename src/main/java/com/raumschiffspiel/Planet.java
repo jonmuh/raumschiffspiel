@@ -48,15 +48,4 @@ public class Planet {
     public int[] getCoordinates() {
         return new int[]{posX, posY};
     }
-
-    @Override
-    public String toString() {
-        return "Planet{" +
-                "name='" + name + '\'' +
-                ", atmosphaere=" + atmosphaere +
-                ", posX=" + posX +
-                ", posY=" + posY +
-                ", ladung=" + ladung.getName() +
-                '}';
-    }
 }

@@ -1,12 +1,15 @@
 package com.raumschiffspiel;
 
+import java.util.ArrayList;
+
 public class Raumschiff {
 
     private String name;
     private int posY;
     private int posX;
     private Kapitaen kapitaen;
-    private Ladung ladung;
+    private ArrayList<Ladung> ladung;
+    double ladungskapazitaet;
     private int integritaetsgrad;
     private int energieschild;
     private double energieVersorgung;
@@ -22,7 +25,7 @@ public class Raumschiff {
         this.posY = posY;
     }
 
-    public Raumschiff(String name, int posY, int posX, Kapitaen kapitaen, Ladung ladung, int integritaetsgrad, int energieschild, double energieVersorgung, int manoevrierFaehigkeit, int waffenstaerke, int laserWaffenstaerke, int raketenWaffenstaerke) {
+    public Raumschiff(String name, int posY, int posX, Kapitaen kapitaen, ArrayList<Ladung> ladung, int integritaetsgrad, int energieschild, double energieVersorgung, int manoevrierFaehigkeit, int waffenstaerke, int laserWaffenstaerke, int raketenWaffenstaerke) {
         this.name = name;
         this.posY = posY;
         this.posX = posX;
@@ -84,14 +87,6 @@ public class Raumschiff {
         this.kapitaen = kapitaen;
     }
 
-    public Ladung getLadung() {
-        return ladung;
-    }
-
-    public void setLadung(Ladung ladung) {
-        this.ladung = ladung;
-    }
-
     public int getIntegritaetsgrad() {
         return integritaetsgrad;
     }
@@ -132,8 +127,58 @@ public class Raumschiff {
         this.waffenstaerke = waffenstaerke;
     }
 
-    public void removeLadung() {
-        this.ladung = null;
+    public ArrayList<Ladung> getLadung() {
+        return ladung;
+    }
+
+    public void addLadung(Ladung ladung) {
+        if (this.getGesamtgewicht() + ladung.getGewicht() > this.ladungskapazitaet) {
+            System.out.println("Ladung kann nicht aufgenommen werden, da das maximale Gewicht überschritten wird.");
+        } else {
+            this.ladung.add(ladung);
+        }
+    }
+
+    public void removeLadung(Ladung ladung) {
+        this.ladung.remove(ladung);
+    }
+
+    public double getLadungskapazitaet() {
+        return ladungskapazitaet;
+    }
+
+    public void setLadungskapazitaet(double ladungskapazitaet) {
+        this.ladungskapazitaet = ladungskapazitaet;
+    }
+
+    public int getRaketenWaffenstaerke() {
+        return raketenWaffenstaerke;
+    }
+
+    public void setRaketenWaffenstaerke(int raketenWaffenstaerke) {
+        this.raketenWaffenstaerke = raketenWaffenstaerke;
+    }
+
+    public int getLaserWaffenstaerke() {
+        return laserWaffenstaerke;
+    }
+
+    public void setLaserWaffenstaerke(int laserWaffenstaerke) {
+        this.laserWaffenstaerke = laserWaffenstaerke;
+    }
+
+    public double getGesamtgewicht() {
+        double gesamtgewicht = 0;
+        for (Ladung l : ladung) {
+            gesamtgewicht += l.getGewicht();
+        }
+        return gesamtgewicht;
+    }
+
+    public void printLadung() {
+        for (Ladung l : ladung) {
+            System.out.println(l);
+        }
     }
 
     public void fliegen(char richtung) {
@@ -250,8 +295,8 @@ public class Raumschiff {
                 "name='" + name + '\'' +
                 ", posY=" + posY +
                 ", posX=" + posX +
-                ", kapitaen=" + kapitaen.getName() +
-                ", ladung=" + ladung.getName() +
+                ", kapitaen=" + kapitaen +
+                ", ladung=" + ladung +
                 ", integritaetsgrad=" + integritaetsgrad +
                 ", energieschild=" + energieschild +
                 ", energieVersorgung=" + energieVersorgung +
@@ -268,7 +313,7 @@ public class Raumschiff {
         private int posY;
         private int posX;
         private Kapitaen kapitaen;
-        private Ladung ladung;
+        private ArrayList<Ladung> ladung;
         private int integritaetsgrad;
         private int energieschild;
         private double energieVersorgung;
@@ -297,7 +342,7 @@ public class Raumschiff {
             return this;
         }
 
-        public RaumschiffBuilder ladung(Ladung ladung) {
+        public RaumschiffBuilder ladung(ArrayList<Ladung> ladung) {
             this.ladung = ladung;
             return this;
         }

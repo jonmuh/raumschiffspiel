@@ -6,19 +6,21 @@ import java.util.Scanner;
 public class Sonnensystem {
 
     // Kapitaene
-    private static Kapitaen alexiaNova = new Kapitaen("Alexia Nova", 8, 6);
-    private static Kapitaen admiralZenithNightfall = new Kapitaen("Admiral Zenith Nightfall", 10, 10);
+    private static Kapitaen alexiaNova = new Kapitaen("Alexia Nova", 8, 6, 10);
+    private static Kapitaen admiralZenithNightfall = new Kapitaen("Admiral Zenith Nightfall", 10, 10, 4.30);
 
     // Ladungen
-    private static Ladung kisteBier = new Ladung("Kiste Bier", 20);
-    private static Ladung steine = new Ladung("Steine", 50);
-    private static Ladung bretter = new Ladung("Bretter", 100);
-    private static Ladung schwert = new Ladung("Schwert", 10);
+    private static Ladung kisteBier = new Ladung("Kiste Bier", 20, 12.5, 50);
+    private static Ladung steine = new Ladung("Steine", 50, 234, 33);
+    private static Ladung bretter = new Ladung("Bretter", 100, 443.25, 230);
+    private static Ladung schwert = new Ladung("Schwert", 10, 100, 1230);
+
+    //
+    private static ArrayList<Ladung> ladungContainer = new ArrayList<>();
 
     // Raumschiffe
-    private static Raumschiff eosNova = new Raumschiff
-            .RaumschiffBuilder()
-            .name("EosNova")
+    private static Raumschiff eosNova = new Raumschiff.RaumschiffBuilder()
+            .name("Eos Nova")
             .kapitaen(alexiaNova)
             .posX(0)
             .posY(0)
@@ -27,11 +29,25 @@ public class Sonnensystem {
             .energieschild(100)
             .waffenstaerke(87)
             .energieVersorgung(7.5)
-            .raketenWaffenStaerke(65)
-            .laserWaffenstaerke(86)
-            .ladung(kisteBier)
+            .raketenWaffenStaerke(45)
+            .laserWaffenstaerke(12)
+            .ladung(ladungContainer)
             .build();
-    private static Raumschiff auroraQuest = new Raumschiff("AuroraQuest", admiralZenithNightfall,0,0);
+
+    private static Raumschiff auroraQuest = new Raumschiff.RaumschiffBuilder()
+            .name("Aurora Quest")
+            .kapitaen(admiralZenithNightfall)
+            .posX(3)
+            .posY(3)
+            .integritaetsgrad(100)
+            .manoevrierFaehigkeit(65)
+            .energieschild(100)
+            .waffenstaerke(60)
+            .energieVersorgung(5.3)
+            .raketenWaffenStaerke(30)
+            .laserWaffenstaerke(15)
+            .ladung(ladungContainer)
+            .build();
 
     // Planeten
     private static Planet auroria = new Planet("Auroria", false, 5,3);
@@ -52,6 +68,12 @@ public class Sonnensystem {
     private static ArrayList<Asteroidfeld> asteroidfelds = new ArrayList<Asteroidfeld>();
 
     public static void main(String[] args) {
+
+        eosNova.addLadung(kisteBier);
+        eosNova.addLadung(steine);
+
+        auroraQuest.addLadung(bretter);
+        auroraQuest.addLadung(schwert);
 
         planets.add(auroria);
         planets.add(solara);
@@ -97,37 +119,42 @@ public class Sonnensystem {
 
             planets.forEach(planet -> {
                 if (eosNova.pruefeKoordniaten(planet)) {
-                    System.out.println("Sie befinden sich auf dem " + planet.toString());
+                    System.out.println("Sie befinden sich auf dem " + planet);
                     if (planet.getAtmosphaere()) {
                         System.out.println("Der Planet " + planet.getName() + " hat eine Atmosphere");
                     } else {
                         System.out.println("Der Planet " + planet.getName() + " hat keine Atmosphere");
                     }
-                    System.out.println("Der Planet " + planet.getName() + " hat die Ladung: " + planet.getLadung().getName());
-                    System.out.println("Ladung aufnehmen (y) oder (n): ");
-                    char choice = tastatur.nextLine().charAt(0);
-                    if (choice == 'y') {
-                        eosNova.setLadung(planet.getLadung());
-                        planet.setLadung(null);
-                    }
-                    if (planet.getLadung() == null) {
-                        System.out.println("Ladung abgeben (y) oder (n): ");
+                    System.out.println("Der Planet " + planet.getName() + " hat die Ladung: " + planet.getLadung());
+                    char choice;
+                    if (!eosNova.getLadung().isEmpty()) {
+                        System.out.println("Ladungen abgeben (y) oder (n): ");
                         choice = tastatur.nextLine().charAt(0);
                         if (choice == 'y') {
-                            planet.setLadung(eosNova.getLadung());
-                            eosNova.setLadung(null);
+                            System.out.println(eosNova.getName() + " hat an Board die Ladungen: ");
+                            eosNova.getLadung().forEach(System.out::println);
+                            System.out.println("Index der Ladung zum abgeben: ");
+                            int indexOfLadung = Integer.parseInt(tastatur.nextLine());
+                            Handelsstation.ladungAbladen(eosNova, planet, eosNova.getLadung().get(indexOfLadung));
+                        }
+                    } else if (planet.getLadung() != null) {
+                        System.out.println("Der planet " + planet.getName() + " hat die Ladung: " + planet.getLadung());
+                        System.out.println("Ladung aufnehmen (y) oder (n): ");
+                        choice = tastatur.nextLine().charAt(0);
+                        if (choice == 'y') {
+                            Handelsstation.ladungAufnehmen(eosNova, planet, planet.getLadung());
                         }
                     }
                 }
             });
 
             raumschiffs.forEach(raumschiff -> {
-                if (eosNova.pruefeKoordniaten(raumschiff)) {
-                    System.out.println("Hier ist das " + raumschiff.toString());
+                if (eosNova.pruefeKoordniaten(raumschiff) && raumschiff != eosNova) {
+                    System.out.println("Hier ist das " + raumschiff);
                     System.out.println("Angreifen (y) oder (n): ");
                     char choice = tastatur.nextLine().charAt(0);
                     if (choice == 'y') {
-                        System.out.println("Raketengriff(1) oder Laserangriff(2): ");
+                        System.out.println("Raketengriff (1) oder Laserangriff (2): ");
                         int weapon = Integer.parseInt(tastatur.nextLine());
                         if (weapon == 1) {
                             eosNova.raketenAngriff(raumschiff);
