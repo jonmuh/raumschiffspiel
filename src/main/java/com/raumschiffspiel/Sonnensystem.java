@@ -62,8 +62,6 @@ public class Sonnensystem {
 
     // Listen
     private static ArrayList<Planet> planets = new ArrayList<Planet>();
-    private static ArrayList<Ladung> ladungs = new ArrayList<Ladung>();
-    private static ArrayList<Kapitaen> kapitaens = new ArrayList<Kapitaen>();
     private static ArrayList<Raumschiff> raumschiffs = new ArrayList<Raumschiff>();
     private static ArrayList<Asteroidfeld> asteroidfelds = new ArrayList<Asteroidfeld>();
 
@@ -101,7 +99,7 @@ public class Sonnensystem {
 
             alexiaNova.setName("Alexia Starlight Nova");
 
-            System.out.println("Sie fliegen das Raumschiff " + eosNova.toString());
+            System.out.println("Sie fliegen das " + eosNova.toString());
             System.out.println(eosNova.getKoordinaten());
 
             System.out.println("Bewegung (a/w/s/d): ");
@@ -145,6 +143,23 @@ public class Sonnensystem {
                             Handelsstation.ladungAufnehmen(eosNova, planet, planet.getLadung());
                         }
                     }
+                    System.out.println("Nun haben Sie die Möglichkeit ihre Nachrichten in dem Nachrichtenarchiv zu speichern (y) oder (n): ");
+                    choice = tastatur.nextLine().charAt(0);
+                    if (choice == 'y') {
+                        System.out.println("1. Nachricht an das Archiv senden");
+                        System.out.println("2. Alle Nachrichten anzeigen");
+                        int auswahl = Integer.parseInt(tastatur.nextLine());
+                        if (auswahl == 1) {
+                            System.out.println("Geben Sie die Nachricht ein: ");
+                            String nachricht = tastatur.nextLine();
+                            Nachrichtenarchiv.nachrichtHinzufuegen(nachricht);
+                            System.out.println("Nachricht hinzugefügt!");
+                        } else if (auswahl == 2) {
+                            System.out.println("Alle Nachrichten im Archiv:");
+                            ArrayList<String> alleNachrichten = Nachrichtenarchiv.alleNachrichten();
+                            alleNachrichten.forEach(System.out::println);
+                        }
+                    }
                 }
             });
 
@@ -165,6 +180,18 @@ public class Sonnensystem {
                 }
             });
 
+        }
+    }
+
+    class Nachrichtenarchiv {
+        private static ArrayList<String> nachrichten = new ArrayList<>();
+
+        public static void nachrichtHinzufuegen(String nachricht) {
+            nachrichten.add(nachricht);
+        }
+
+        public static ArrayList<String> alleNachrichten() {
+            return new ArrayList<>(nachrichten);
         }
     }
 
