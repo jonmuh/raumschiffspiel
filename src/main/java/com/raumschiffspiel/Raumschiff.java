@@ -18,6 +18,8 @@ public class Raumschiff {
     private int laserWaffenstaerke;
     private int raketenWaffenstaerke;
 
+    public Raumschiff() { }
+
     public Raumschiff(String name, Kapitaen kapitaen, int posX, int posY) {
         this.name = name;
         this.kapitaen = kapitaen;
@@ -224,23 +226,6 @@ public class Raumschiff {
         return areOnSameField;
     }
 
-    public void angreifen(Raumschiff gegnerischesRaumschiff) {
-        // Berechne den Schaden basierend auf verschiedenen Faktoren
-        int schaden = this.waffenstaerke - gegnerischesRaumschiff.energieschild;
-
-        // Überprüfe, ob der Schaden größer als null ist und füge Schaden zu
-        if (schaden > 0) {
-            gegnerischesRaumschiff.integritaetsgrad -= schaden;
-            // Prüfe, ob das gegnerische Raumschiff zerstört wurde
-            if (gegnerischesRaumschiff.integritaetsgrad <= 0) {
-                System.out.println(gegnerischesRaumschiff.getName() + " wurde zerstört!");
-                gegnerischesRaumschiff.zerstoeren();
-            }
-        } else {
-            System.out.println("Der Angriff hat keinen Schaden verursacht!");
-        }
-    }
-
     public void verteidigen(int schaden) {
         // Berechne den tatsächlichen Schaden basierend auf Manövrierfähigkeit und Erfahrung des Captain
         int verteidigungsbonus = this.kapitaen.getErfahrung() + this.manoevrierFaehigkeit;
@@ -286,6 +271,37 @@ public class Raumschiff {
 
         if (gegnerischesRaumschiff.integritaetsgrad <= 0) {
             gegnerischesRaumschiff.zerstoeren();
+        }
+    }
+
+    // Fügt die Methode hinzu, um den Integritätsgrad des Raumschiffs zu prüfen.
+    public void prüfenIntegritätsgrad() {
+        if (this.integritaetsgrad <= 0) {
+            System.out.println(this.name + " wurde zerstört!");
+            this.integritaetsgrad = 0; // Setzt den Integritätsgrad auf 0, um die Zerstörung anzuzeigen.
+        }
+    }
+
+    // Fügt die Methode hinzu, um anzugreifen.
+    public void angreifen(Raumschiff gegner) {
+        int schaden = this.waffenstaerke - gegner.getEnergieschild();
+        if (schaden > 0) {
+            gegner.setIntegritaetsgrad(gegner.getIntegritaetsgrad() - schaden);
+            System.out.println(this.name + " greift " + gegner.getName() + " an und verursacht " + schaden + " Schaden.");
+        } else {
+            System.out.println(this.name + "s Angriff wurde abgewehrt!");
+        }
+        gegner.prüfenIntegritätsgrad();
+    }
+
+    // Fügt die Methode hinzu, um einen Kampf zu initiieren.
+    public void kämpfen(Raumschiff gegner) {
+        System.out.println(this.name + " und " + gegner.getName() + " befinden sich im Kampf!");
+        while (this.integritaetsgrad > 0 && gegner.getIntegritaetsgrad() > 0) {
+            this.angreifen(gegner);
+            if (gegner.getIntegritaetsgrad() > 0) {
+                gegner.angreifen(this);
+            }
         }
     }
 
